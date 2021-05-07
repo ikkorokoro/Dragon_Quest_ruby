@@ -2,7 +2,8 @@ class Brave
 
   # attr_readerの記述でゲッターを省略することができる
   attr_reader :name, :hp, :offense, :defense
-
+  # attr_writerでセッターを定義
+  attr_writer :hp
   # 引数に**を記述：ハッシュしか受け取れなくなる
   def initialize(**params)
     @name = params[:name]
@@ -10,7 +11,6 @@ class Brave
     @offense = params[:offense]
     @defense = params[:defense]
   end
-
 
   #インスタンス作成時にinitializeメソッドが呼び出され初期値を設定するためセッター不要のためを削除
   # def name=(name)
@@ -45,6 +45,7 @@ class Brave
   # def defense
   #   @defense
   # end
+end
 
   brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
   # インスタンス作成時にinitializeメソッドが呼び出され初期値を設定するため以下不要のためを削除
@@ -62,4 +63,6 @@ class Brave
   OFFENSE：#{brave.offense}
   DEFENSE：#{brave.defense}
   TEXT
-end
+
+  brave.hp -= 30
+  puts "#{brave.name}はダメージを受けた！残りHPは#{brave.hp}"
