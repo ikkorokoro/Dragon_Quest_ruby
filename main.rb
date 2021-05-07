@@ -2,8 +2,9 @@ class Brave
 
   # attr_readerの記述でゲッターを省略することができる
   attr_reader :name, :hp, :offense, :defense
-  # attr_writerでセッターを定義
-  attr_writer :hp
+  #セッターゲッターを一括定義
+  attr_accessor :hp
+  
   # 引数に**を記述：ハッシュしか受け取れなくなる
   def initialize(**params)
     @name = params[:name]
