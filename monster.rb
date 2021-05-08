@@ -10,7 +10,8 @@ class Brave
   end
 
   def attack(monster)
-    puts "テスト: #{monster.name}のHPを表示 => #{monster.hp}"
+    damage = @offense - monster.defense
+    puts damage
   end
 end
 
