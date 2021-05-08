@@ -11,7 +11,12 @@ class Brave
 
   def attack(monster)
     damage = @offense - monster.defense
-    puts damage
+    # ダメージを与えられたHPをモンスターインスタンスのHPに代入(自己代入記法)
+    monster.hp -= damage
+    # メッセージを追記
+    puts "#{@name}の攻撃"
+    puts "#{monster.name}は#{damage}のダメージを受けた"
+    puts "#{monster.name}の残りHPは#{monster.hp}だ"
   end
 end
 
