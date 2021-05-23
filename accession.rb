@@ -8,33 +8,19 @@
 =end
 #共通化しているパラメータを親クラスに定義し、クラスの継承を行うことで重複しているコードを無くし、可読性をあげる
 
-#別ファイルを読み込む
 
+#別ファイルを読み込む
 require './brave'
 require './monster'
+require './games_controller'
+games_controller = GamesController.new
 
-brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
-monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
+terry = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
+slime = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
 
-loop do
-  brave.attack(monster)
-  break if monster.hp <= 0
+games_controller.battle(brave: terry, monster: slime)
 
-  monster.attack(brave)
-  break if brave.hp <= 0
-end
 
-battle_result = brave.hp > 0
-
-if battle_result
-  exp = (monster.offense + monster.defense) * 2
-  gold = (monster.offense + monster.defense) * 3
-  puts "#{brave.name}はたたかいに勝った"
-  puts "#{exp}の経験値と#{gold}ゴールドを獲得した"
-else
-  puts "#{brave.name}はたたかいに負けた"
-  puts "目の前が真っ暗になった"
-end
 
 =begin
 ＊注１
@@ -43,7 +29,7 @@ initializeメソッドに関しては、モンスタークラスとキャラク�
 共通しているパラメータ	
 name, hp, offense defense	
 
-共通していないパラメータ
+共通していないパラメータ1
 transform_flag, threshold_of_transform
 そのような時に使用するのがsuperというメソッドです。
 superは、実行しているメソッドがオーバーライドしているメソッドを呼び出します。
