@@ -112,8 +112,18 @@ end
   #loop によって以下の処理が無限繰り返し処理される
   loop do
     brave.attack(monster)
-    break if monster.hp <= 0
-      
+    if monster.hp <= 0
+      exp = (monster.offense + monster.defense) * 2
+      gold = (monster.offense + monster.defense) * 3
+      puts "#{brave.name}は戦いに勝った"
+      puts "#{exp}の経験値と#{gold}ゴールドを獲得した"
+      break  
+    end
+
     monster.attack(brave)
-    break if brave.hp <= 0
+    if brave.hp <= 0
+      puts "#{brave.name}は戦いに負けた"
+      puts "目の前が真っ暗になった"
+      break
+    end
   end
