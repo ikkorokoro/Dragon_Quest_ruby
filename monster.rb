@@ -31,7 +31,8 @@ class Brave
     # ダメージを与えられたHPをモンスターインスタンスのHPに代入(自己代入記法)
     monster.hp -= damage
 
-    # メッセージを追記
+    monster.hp = 0 if monster.hp < 0
+
     puts "#{monster.name}は#{damage}のダメージを受けた"
     puts "#{monster.name}の残りHPは#{monster.hp}だ"
   end
@@ -69,9 +70,13 @@ class Monster
     puts "#{@name}の攻撃"
 
     damage = calculate_damage(brave)
+
     # ダメージ反映処理の呼び出し
     cause_damage(target: brave, damage: damage)
     
+    #もしターゲットが0以下ならhpを０を代入する
+    brave.hp = 0 if brave.hp < 0
+
     puts "#{brave.name}の残りHPは#{brave.hp}だ"
   end
 
@@ -103,5 +108,12 @@ class Monster
 end
   monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
   brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
-  brave.attack(monster)
-  monster.attack(brave)
+  
+  #loop によって以下の処理が無限繰り返し処理される
+  loop do
+    brave.attack(monster)
+    break if monster.hp <= 0
+      
+    monster.attack(brave)
+    break if brave.hp <= 0
+  end
