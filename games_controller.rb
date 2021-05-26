@@ -20,9 +20,9 @@ class GamesController
   # 以下のメソッドはクラス外から呼び出す必要がないのでprivate以下に記述する
   private
   #メソッド間の引数の受け渡しをなくすため、インスタンス変数に代入して参照できるようにする
-  def build_caracters
-    @brave = params[:brave] don’t 
-    @monster = @params[:monster]
+  def build_caracters(params)
+    @brave = params[:brave]
+    @monster = params[:monster]
   end
 
   #バトル終了の判定
@@ -39,11 +39,11 @@ class GamesController
   def battle_jugment
     if brave_win?
       result = calculate_of_exp_and_gold
-      puts "#{@brave.name}は戦いに勝った"
-      puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールドを獲得した"
+      # puts "#{@brave.name}は戦いに勝った"
+      # puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールドを獲得した"
     else
-      puts "#{@brave.name}はたたかいに負けた"
-      puts "目の前が真っ暗になった"
+      # puts "#{@brave.name}はたたかいに負けた"
+      # puts "目の前が真っ暗になった"
     end
   end
   
