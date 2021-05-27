@@ -54,13 +54,28 @@ class Monster < Character
     def transform
       transform_name = "ドラゴン"
 
-      # puts <<~EOS
-      # #{@name}は怒っている
-      # #{@name}は#{transform_name}に変身した
-      # EOS
+      transform_message(origin_name: @name, transform_name: transform_name)
 
       @offense *= POWER_UP_RATE
       @name = transform_name
     end
 end
+
+=begin
+＊注１
+initializeメソッドに関しては、モンスタークラスとキャラクタークラスとでは「共通している部分」と「共通していない部分」があります。
+「共通している部分」だけを削除し、「共通していない部分」を残す
+共通しているパラメータ	
+name, hp, offense defense	
+
+共通していないパラメータ1
+transform_flag, threshold_of_transform
+
+そのような時に使用するのがsuperというメソッドです。
+superは、実行しているメソッドがオーバーライドしているメソッドを呼び出します。
+オーバーライドとは「親クラスのメソッドを子クラスで上書きすること」です。
+今回の例であれば、キャラクタークラスのinitializeメソッドをモンスタークラスのinitializeメソッドで上書きすることを指します。
+そして、モンスタークラスのinitializeメソッド中でsuperを使うことにより、キャラクタークラスのinitializeメソッドを実行することができます。
+これにより、「共通している部分」と「共通していない部分」で処理を振り分けることができるようになります。
+=end
 
