@@ -18,7 +18,26 @@ module MessageDialog
   end
 
   #バトルが終了した時のメッセージ
-  def end_message
+  def end_message(result)
+    if result[:brave_win_flag]
+      puts <<~EOS
+      勇者は買った
+      #{result[:exp]}の経験値と#{result[:gold]}のゴールドを手に入れた
+    EOS
+    else
+      puts <<~EOS
+      勇者は負けた
+      目の前が真っ暗になった
+      EOS
+    end
+  end
 
+  def transform_message(**params)
+    origin_name = params[:origin_name]
+    transform_name = params[:transform_name]
+    puts <<~EOS
+    #{origin_name}は怒っている
+    #{origin_name}は#{transform_name}に変身した
+    EOS
   end
 end
